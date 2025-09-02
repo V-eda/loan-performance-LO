@@ -16,7 +16,7 @@ git add .
 git commit -m "🚀 Deploy LoanSense AI Dashboard - Ready for production"
 
 # Push to your GitHub repository
-git remote add origin https://github.com/V-eda/loan-performance-dashboard.git
+git remote add origin https://github.com/V-eda/loan-performance-LO.git
 git push -u origin main
 ```
 
@@ -26,7 +26,7 @@ git push -u origin main
 2. **Login with GitHub** 
 3. **Click "New Project"**
 4. **Select "Deploy from GitHub repo"**
-5. **Choose your repository: `loan-performance-dashboard`**
+5. **Choose your repository: `loan-performance-LO`**
 6. **Select Root Directory**: `/backend`
 7. **Railway will auto-detect Python and deploy!**
 
