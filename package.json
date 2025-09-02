@@ -1,0 +1,13 @@
+{
+  "name": "loan-performance-dashboard",
+  "version": "1.0.0",
+  "description": "Loan Officer Performance Dashboard",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT"
+  },
+  "engines": {
+    "node": "18.x",
+    "python": "3.11.x"
+  }
+}
