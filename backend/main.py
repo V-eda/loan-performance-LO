@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import pandas as pd
@@ -55,13 +57,28 @@ class Performance(BaseModel):
     avg_deal_size: float
     conversion_rate: float
 
-@app.get("/")
-async def root():
+# Mount static files (React build)
+app.mount("/static", StaticFiles(directory="../frontend/build/static"), name="static")
+
+@app.get("/api")
+async def api_root():
     return {
         "message": "Loan Officer Performance Intelligence API",
         "status": "active",
         "version": "1.0.0"
     }
+
+@app.get("/")
+async def serve_frontend():
+    return FileResponse("../frontend/build/index.html")
+
+# Catch-all route for React Router (must be last)
+@app.get("/{path:path}")
+async def catch_all(path: str):
+    # Serve index.html for any path that doesn't start with /api
+    if not path.startswith("api/"):
+        return FileResponse("../frontend/build/index.html")
+    raise HTTPException(status_code=404, detail="API endpoint not found")
 
 @app.get("/api/dashboard/overview")
 async def get_dashboard_overview():
